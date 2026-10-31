@@ -15,12 +15,11 @@ npm run build      # outputs dist/
 Option 1, Wrangler CLI (needs a Cloudflare account and `npx wrangler login`):
 
 ```bash
-npm run build
-npx wrangler pages deploy dist --project-name asean-startup-passport
+npm run build                       # from the repo root
+npx wrangler pages deploy app/dist --project-name asean-startup-passport
 ```
 
-Option 2, Git integration: in the Cloudflare dashboard create a Pages project from this repo with
-build command `npm run build` and output directory `dist` (root directory `app`).
+Option 2, Git integration: in the Cloudflare dashboard create a Pages project from this repo. The root `wrangler.toml` and `package.json` set the build (`npm run build`) and output (`app/dist`), so the defaults work.
 
 `public/_headers` sets a strict Content-Security-Policy. Gemma calls are made from the browser, so
 the endpoint must allow CORS from the Pages domain.

@@ -1,4 +1,0 @@
-# Cloudflare Pages: `npm run build` then `npx wrangler pages deploy dist --project-name asean-startup-passport`
-name = "asean-startup-passport"
-pages_build_output_dir = "dist"
-compatibility_date = "2026-01-01"

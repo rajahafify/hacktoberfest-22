@@ -1,0 +1,7 @@
+{
+  "name": "hacktoberfest-22",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix app ci && npm --prefix app run build"
+  }
+}
