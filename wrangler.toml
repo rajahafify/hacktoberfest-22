@@ -1,4 +1,0 @@
-# Cloudflare Pages reads this from the repo root: build with `npm run build`, serve `app/dist`.
-name = "asean-startup-passport"
-pages_build_output_dir = "app/dist"
-compatibility_date = "2026-01-01"
