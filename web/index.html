@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ASEAN Startup Passport</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand">
+    <span class="logo">ASP</span>
+    <div><b>ASEAN Startup</b><br><span class="hint">Passport</span></div>
+  </div>
+  <nav class="main-nav" id="nav" hidden>
+    <a href="#/dashboard" data-nav="dashboard">Home</a>
+    <a href="#/profile" data-nav="profile">My Profile</a>
+    <a href="#/challenges" data-nav="challenges">Challenges</a>
+    <a href="#/deals" data-nav="deals">Deals Tracker</a>
+    <a href="#/notifications" data-nav="notifications">Notifications <span class="badge" id="nav-badge" hidden>0</span></a>
+    <a href="#/kyb" data-nav="kyb">KYB</a>
+  </nav>
+  <div class="user" id="user-chip" hidden>
+    <span id="user-name"></span>
+    <button id="logout" class="secondary">Log out</button>
+  </div>
+</aside>
+<div class="content">
+
+<main>
+  <section class="view" id="view-dashboard" hidden>
+    <div>
+      <h1 class="page-title" id="welcome"></h1>
+      <p class="hint">Your ASEAN startup opportunities</p>
+    </div>
+    <div class="card progress-card">
+      <div class="dial" id="profile-ring"><span id="profile-pct">0%</span></div>
+      <div>
+        <b>Complete your startup profile</b>
+        <p class="hint" id="profile-hint"></p>
+      </div>
+      <a class="btn" href="#/profile">Update profile</a>
+    </div>
+    <div class="kyb-layout">
+      <div class="card">
+        <div class="row-between"><h2>Recommended challenges</h2><a href="#/challenges">See all →</a></div>
+        <div id="dash-recs" class="stack-list"></div>
+      </div>
+      <div class="card">
+        <h2>Your deal progress</h2>
+        <div id="dash-deal"></div>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="view-login" hidden>
+    <div class="card login-card">
+      <h2>Log in</h2>
+      <p class="hint">Demo login: no password. Your details stay in this browser.</p>
+      <form id="login-form" class="stack">
+        <label>Founder name <input name="name" placeholder="e.g. Aisha Rahman"></label>
+        <label>Company <input name="company" placeholder="KOPI LEDGER PTE. LTD."></label>
+        <label>Work email <input name="email" type="email" placeholder="you@company.com"></label>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="view" id="view-profile" hidden>
+    <div class="kyb-layout">
+      <div class="card">
+        <h2>MyProfile</h2>
+        <form id="profile-form" class="stack">
+          <label>Founder name <input name="name"></label>
+          <label>Company <input name="company"></label>
+          <label>Work email <input name="email" type="email"></label>
+        </form>
+        <fieldset>
+          <legend>Sectors</legend>
+          <div id="sector-checks" class="checks"></div>
+        </fieldset>
+      </div>
+      <div class="card">
+        <h2>KYB status</h2>
+        <div id="profile-kyb"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-challenges" hidden>
+    <div class="card">
+      <h2>Corporate Challenges</h2>
+      <p class="hint">Real business problems with budgets. AI-matched from your sectors, markets and KYB readiness (rule-based in this prototype).</p>
+      <div id="filter-chips" class="chips"></div>
+      <div id="challenge-list" class="grid-cards"></div>
+    </div>
+    <div class="kyb-layout">
+      <div class="card">
+        <h2>Post your solution</h2>
+        <form id="solution-form" class="stack">
+          <label>Solution title <input name="title" required></label>
+          <label>One-line pitch <textarea name="pitch" rows="3"></textarea></label>
+          <label>Sector <select name="sector" id="solution-sector"></select></label>
+          <fieldset>
+            <legend>Markets</legend>
+            <div id="solution-markets" class="checks"></div>
+          </fieldset>
+          <button type="submit">Save draft</button>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Your solutions</h2>
+        <div id="solution-list" class="stack-list"></div>
+        <p class="hint">Posting needs an approved KYB. Drafts stay private until then.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-deals" hidden>
+    <div class="card">
+      <h2>DealTracker</h2>
+      <p class="hint">Appointments and progress with each counterpart, from first match to closed deal.</p>
+      <div id="deal-list" class="stack-list"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-notifications" hidden>
+    <div class="card">
+      <div class="row-between">
+        <h2>Notifications</h2>
+        <button id="mark-read" class="secondary">Mark all read</button>
+      </div>
+      <div id="notif-list" class="stack-list"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-kyb" hidden>
+    <p class="card" id="kyb-banner"></p>
+    <div class="kyb-layout">
+      <aside id="docs-panel">
+        <div class="backend">
+          <label for="backend">Extraction backend</label>
+          <select id="backend"></select>
+          <small id="backend-desc" class="hint"></small>
+        </div>
+        <h2>1. Documents</h2>
+        <p class="hint">Synthetic filings for <b>Kopi Ledger</b>, a Singapore holding company with entities in four other ASEAN markets. Toggle files to see the score move.</p>
+        <ul id="doc-list"></ul>
+        <details class="add">
+          <summary>Add your own document</summary>
+          <input type="file" id="file-input" accept=".txt,.md,.csv,.json" multiple>
+          <textarea id="paste" placeholder="…or paste registry text in any ASEAN language"></textarea>
+          <button id="add-paste" class="secondary">Add pasted text</button>
+        </details>
+        <button id="run">Run due diligence</button>
+        <p id="status" class="hint"></p>
+      </aside>
+
+      <section id="results" hidden>
+        <div class="row">
+          <div class="card" id="score-card">
+            <h2>2. Investment Readiness Score</h2>
+            <div class="score-head">
+              <div class="dial"><span id="score-total">0</span><small>/ 1000</small></div>
+              <div><div id="grade" class="grade"></div><div id="band"></div><div id="subject" class="hint"></div></div>
+            </div>
+            <div id="pillars"></div>
+            <details><summary>All scoring checks</summary><table id="checks"></table></details>
+          </div>
+          <div class="card" id="graph-card">
+            <h2>3. Ownership &amp; UBO map</h2>
+            <div id="graph"></div>
+            <div class="legend">
+              <span><i class="sw person"></i>Natural person</span>
+              <span><i class="sw entity"></i>Verified entity</span>
+              <span><i class="sw opaque"></i>Opaque / offshore</span>
+              <span><i class="sw ubo"></i>UBO ≥ 25%</span>
+            </div>
+            <div id="ubo-table"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>4. Cross-verification findings</h2>
+          <ul id="findings"></ul>
+        </div>
+
+        <div class="card">
+          <h2>5. What Gemma extracted</h2>
+          <div id="extractions"></div>
+        </div>
+
+        <div class="card">
+          <h2>6. Portable passport (W3C Verifiable Credential)</h2>
+          <p class="hint">Share this instead of the documents. Verifiers check the signature and the document hashes; UBO names stay with the issuer.</p>
+          <div class="vc-actions">
+            <button id="verify" class="secondary">Verify</button>
+            <button id="tamper" class="secondary">Tamper with score</button>
+            <button id="download" class="secondary">Download JSON</button>
+            <span id="verify-result"></span>
+          </div>
+          <pre id="vc"></pre>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+<footer>Prototype. All companies, people and filings are synthetic. Scores are illustrative, not legal or investment advice.</footer>
+</div>
+</div>
+<script src="app.js"></script>
+<script src="flow.js"></script>
+</body>
+</html>
